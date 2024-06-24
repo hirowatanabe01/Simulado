@@ -6,9 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class JoinController {
@@ -41,7 +39,7 @@ public class JoinController {
 
     //Pessoa
     private static List<Pessoa> lerPessoasCsv(String filename) {
-        List<Pessoas> pessoas = new ArrayList<>();
+        List<Pessoa> pessoas = new ArrayList<>();
             try (Scanner scanner = new Scanner(new File(filename))) {
                 scanner.nextLine(); 
                 while (scanner.hasNextLine()) {
@@ -49,7 +47,9 @@ public class JoinController {
                     String[] parts = line.split(";");
                     int id = Integer.parseInt(parts[0]);
                     String nome = parts[1];
-                    pessoas.add(new Pessoas(id, nome));
+                    /* String rua = parts[2];
+                    String cidade = parts[3]; */
+                    pessoas.add(new Pessoa(id, nome));
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

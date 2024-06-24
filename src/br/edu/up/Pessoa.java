@@ -13,6 +13,11 @@ public class Pessoa {
         this.cidade = cidade;
     }
 
+    public Pessoa(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     // Getter methods
     public int getId() {
         return id;
