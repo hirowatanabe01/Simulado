@@ -17,13 +17,13 @@ public class JoinController {
         List<Endereco> enderecos = lerEnderecoCsv("Enderecos.csv");
 
         // Join por ID
-        Map<Integer, String> dadosCombinados = new HashMap<>();
+        List<Pessoa> dadosCombinados = new ArrayList<>();
 
         for (Pessoa p : pessoas) {
             for (Endereco e : enderecos) {
                 if (p.getId() == e.getId()) {
-                    String combinacao = p.getNome() + "; " + e.getRua() + "; " + e.getCidade();
-                    dadosCombinados.put(p.getId(), combinacao);
+                    Pessoa pessoaCombinada = new Pessoa(p.getId(), p.getNome(), e.getRua(), e.getCidade());
+                    dadosCombinados.add(pessoaCombinada);
                     break;
                 }
             }
@@ -31,8 +31,8 @@ public class JoinController {
 
         // Gravar CSV
         try (PrintWriter writer = new PrintWriter(new FileWriter("DadosCombinados.csv"))) {
-            for (Map.Entry<Integer, String> entry : dadosCombinados.entrySet()) {
-                writer.println(entry.getKey() + "; " + entry.getValue());
+            for (Pessoa pessoa : dadosCombinados) {
+                writer.println(pessoa.getId() + "; " + pessoa.getNome() + "; " + pessoa.getRua() + "; " + pessoa.getCidade());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,7 +41,7 @@ public class JoinController {
 
     //Pessoa
     private static List<Pessoa> lerPessoasCsv(String filename) {
-        List<Pessoa> pessoas = new ArrayList<>();
+        List<Pessoas> pessoas = new ArrayList<>();
             try (Scanner scanner = new Scanner(new File(filename))) {
                 scanner.nextLine(); 
                 while (scanner.hasNextLine()) {
@@ -49,7 +49,7 @@ public class JoinController {
                     String[] parts = line.split(";");
                     int id = Integer.parseInt(parts[0]);
                     String nome = parts[1];
-                    pessoas.add(new Pessoa(id, nome));
+                    pessoas.add(new Pessoas(id, nome));
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

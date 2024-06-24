@@ -1,34 +1,32 @@
 package br.edu.up;
 
 public class Pessoa {
-    int id;
-    String nome;
+    private int id;
+    private String nome;
+    private String rua;
+    private String cidade;
 
-    public Pessoa(int id, String nome) {
+    public Pessoa(int id, String nome, String rua, String cidade) {
         this.id = id;
         this.nome = nome;
+        this.rua = rua;
+        this.cidade = cidade;
     }
 
+    // Getter methods
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getRua() {
+        return rua;
     }
 
-    @Override
-    public String toString() {
-        return "Pessoa [id=" + id + ", nome=" + nome + "]";
+    public String getCidade() {
+        return cidade;
     }
-
-    
 }
